@@ -1,0 +1,42 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Reservation</h1>
+    <a href="{{ path('admin_reservation_index') }}" class="btn btn-secondary">Retourner à la liste</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ reservation.name }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ reservation.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ reservation.jour ? reservation.jour|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure</th>
+                <td>{{ reservation.heure }}</td>
+            </tr>
+            <tr>
+                <th>Personnes</th>
+                <td>{{ reservation.personnes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('admin_reservation_edit', {'id': reservation.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+
+    {{ include('admin_reservation/_delete_form.html.twig') }}
+{% endblock %}

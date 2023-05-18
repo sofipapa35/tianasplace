@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Avis</h1>
+	</div>
+	<div class="col-12 p-3 d-flex justify-content-end align-items-center h-block-common">
+		<p class="lead m-0 text-end">Écrivez-nous un commentaire.<br>Cela nous fera plaisir !!!</p>
+	</div>
+	{# Si le User est connecté, on affiche le formulaire #}
+	{% if is_granted('ROLE_USER') %} 
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<div class="h-block-common my-3 p-3 col-12 col-md-8">
+				<p class="text-end">* champs obligatoires</p>
+				{{form_start(form)}}
+
+				<div class="ms-4">{{form_row(form.title)}}</div>
+
+				<div class="d-flex">
+					<i class="fa-solid fa-comment me-2"></i>
+					<div class="w-100">{{form_row(form.texte)}}</div>
+				</div>
+
+				{{form_end(form)}}
+			</div>
+		</div>
+	{% else %}
+	{# Sinon on lui demmande de se connecter #}
+		<div class="col-12 p-3 mt-2 d-flex justify-content-end align-items-center">
+			<p class="m-0 text-end">Vous devez être connecté pour laisser un commentaire</p>
+		</div>
+	{% endif %}
+	<div class="d-flex">
+	{% for avis in comment %}
+
+	<div class="card m-2" style="width: 18rem;">
+  		<div class="card-body">
+    		<h3 class="text-start">"{{avis.title}}"</h3>
+    		<small>A été créé le :
+				<span class="fs-6">
+					<b>{{avis.createdAt.format('d/m/Y')}}</b>
+				</span>
+			</small>&nbsp&nbsp
+			<small>par :
+				<span class="fs-6">
+					<b>{{avis.user.firstname}}</span>
+					{{avis.user.name}}</b>
+			</small>
+			<p>{{avis.texte}}</p>
+		</div>
+  </div>
+	{% endfor %}
+</div>
+
+{% endblock %}

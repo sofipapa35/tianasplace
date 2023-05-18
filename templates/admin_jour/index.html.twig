@@ -1,0 +1,41 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Jour{% endblock %}
+
+{% block body %}
+    <h1>Jour</h1>
+
+    <a href="{{ path('admin_jour_new') }}" class="btn btn-warning m-1">Nouveau</a>
+    <a href="{{ path('admin_disponibility_index') }}" class="btn btn-warning m-1">Retourner aux Disponibilities</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jour in jours %}
+            <tr>
+                <td>{{ jour.id }}</td>
+                <td>{{ jour.jour ? jour.jour|date('d-m-Y') : '' }}</td>
+                <td class="text-end">
+                    <a href="{{ path('admin_jour_show', {'id': jour.id}) }}" class="btn btn-primary"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('admin_jour_edit', {'id': jour.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune entrée trouveé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+	<div class="navigation">
+		{{ knp_pagination_render(jours)}}
+	</div>
+
+
+{% endblock %}

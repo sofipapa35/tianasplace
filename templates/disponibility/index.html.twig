@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Reserver une table</h1>
+	</div>
+	<div class="d-flex flex-column justify-content-center align-items-center">
+		<div class="y-3 p-3 col-12 col-md-8">
+			<p class="text-end">* champs obligatoires</p>
+			{{ form_start(form)}}
+			{% if (app.user) %}
+				{# Si il y a un user connecté les champs nom et email sont remplis avec ses données #}
+				{{ form_row(form.name, {'value' : app.user.name})}}
+				{{ form_row(form.email, {'value' : app.user.email})}}
+			{% else %}
+				{# Sinon ils sont vides #}
+				{{ form_row(form.name)}}
+				{{ form_row(form.email)}}
+			{% endif %}
+			{{ form_row(form.jour)}}
+			{{ form_row(form.personnes)}}
+			{{ form_row(form.heure)}}
+			<button type="submit" class="btn btn-dark p-md-3">Réserver</button>
+			{{ form_end(form)}}
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascripts %}
+	<script>
+		// Au debut les champs Nombre de personnes et Heure sont vides
+$("#disponibility_personnes").html('');
+$("#disponibility_heure").html('');
+
+// changement date
+$("#disponibility_jour").on("change", function () {
+var date = $(this).val();
+// faire une requête ajax en envoyant la date
+$.ajax({
+url: 'getPeople',
+type: 'POST',
+data: 'jour=' + date
+}).done(function (response) {
+$("#disponibility_personnes").html(response);
+})
+});
+
+// Changement nbre personnes
+$("#disponibility_personnes").on("change", function () {
+var nbPeopleId = $(this).val();
+var date = $("#disponibility_jour").val();
+// faire une requête ajax en envoyant l'id du nombre de people et la date
+$.ajax({
+url: 'getTime',
+type: 'POST',
+data: 'nombre=' + nbPeopleId + '&jour=' + date
+}).done(function (response) {
+$("#disponibility_heure").html(response);
+})
+});
+	</script>
+{% endblock %}

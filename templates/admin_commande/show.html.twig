@@ -1,0 +1,47 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Commande
+{% endblock %}
+
+{% block body %}
+	<h1>Commande</h1>
+
+	<a href="{{ path('admin_commande_index') }}" class="btn btn-secondary">Retourner à la liste</a>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td colspan="5">{{ commande.id }}</td>
+			</tr>
+			<tr>
+				<th>Date</th>
+				<td colspan="5">{{ commande.createdAt ? commande.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Infos</th>
+				<td colspan="5">{{ commande.delivery|raw }}</td>
+			</tr>
+			<tr>
+				<th>Terminé ?</th>
+				<td colspan="5">{{ commande.isPaid ? '<i class="align-middle" data-feather="check"></i>' : 'Non' }}</td>
+			</tr>
+			<th rowspan="{{commande.orderDetails|length + 1}}">Produits</th>
+			{% for detail in commande.orderDetails %}
+				<tr>
+					{% set infos = detail.product|split(',') %}
+					<td class="col-md-2"><img src="{{asset('images/menu/' ~ infos[1]|trim)}}" alt="{{infos[2]}}" class="img-fluid"></td>
+					<td>Id :{{ infos[0] }}</td>
+					<td>{{ infos[2] }}</td>
+					<td>Quantité :{{ detail.qnt }}</td>
+					<td>Prix :{{ detail.price|number_format(2) }}€</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<th>Total :</th>
+				<td colspan="5">{{ commande.total|number_format(2) }}€</td>
+			</tr>
+		</tbody>
+	</table>
+
+	{{ include('admin_commande/_delete_form.html.twig') }}
+{% endblock %}

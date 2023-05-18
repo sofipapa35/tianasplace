@@ -1,0 +1,92 @@
+<nav id="sidebar" class="sidebar js-sidebar">
+	<div class="sidebar-content js-simplebar">
+		<a class="sidebar-brand" href="{{ path('home') }}">
+			<span class="align-middle">Tiana's Place</span>
+		</a>
+
+		<li class="sidebar-item active">
+			<a class="sidebar-link" href="{{path('admin')}}">
+				<i class="align-middle" data-feather="sliders"></i>
+				<span class="align-middle">Dashboard</span>
+			</a>
+		</li>
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">
+				Pages
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-profile.html">
+					<i class="align-middle" data-feather="user"></i>
+					<span class="align-middle">Profile</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-sign-in.html">
+					<i class="align-middle" data-feather="log-in"></i>
+					<span class="align-middle">Sign In</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-sign-up.html">
+					<i class="align-middle" data-feather="user-plus"></i>
+					<span class="align-middle">Sign Up</span>
+				</a>
+			</li>
+
+			<li class="sidebar-header">
+				Contenus
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_reservation_index')}}">
+					<i class="align-middle" data-feather="square"></i>
+					<span class="align-middle">Reservations</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_disponibility_index')}}">
+					<i class="align-middle" data-feather="check-circle"></i>
+					<span class="align-middle">Disponibilities</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_commande_index')}}">
+					<i class="align-middle" data-feather="check-square"></i>
+					<span class="align-middle">Commandes</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_product_index')}}">
+					<i class="align-middle" data-feather="map"></i>
+					<span class="align-middle">La Carte</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_category_index')}}">
+					<i class="align-middle" data-feather="tag"></i>
+					<span class="align-middle">Categories</span>
+				</a>
+			</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_timeline_index')}}">
+					<i class="align-middle" data-feather="music"></i>
+					<span class="align-middle">Timeline</span>
+				</a>
+			</li>
+
+            <li class="sidebar-item">
+				<a class="sidebar-link" href="{{path('admin_carousel_index')}}">
+					<i class="align-middle" data-feather="circle"></i>
+					<span class="align-middle">Carousel</span>
+				</a>
+			</li>
+	</div>
+</nav>

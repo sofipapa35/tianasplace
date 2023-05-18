@@ -1,0 +1,22 @@
+<h1>Reservation n° {{reservation.id}}</h1>
+
+<p>Bonjour
+	<span class="text-green">
+		{{reservation.name}}</span>,
+	<br>
+	Nous vous remercions pour votre reservation n°
+	<span class="text-green">{{reservation.id}}</span>.
+    <br>
+    <span>
+        <b>Date :</b> {{reservation.jour|date('d-m-Y')}}
+        <br>
+        <b>Heure :</b> {{reservation.heure}}
+        <br>
+        <b>Nombre de personnes :</b> {{reservation.personnes}}
+    </span>
+</p>
+{% if user %}
+    <hr>
+    Pour consulter votre reservation, rendez-vous dans le rubrique reservation de votre
+    <a href="{{absolute_url(path('profile'))}}">espace personnel</a>.
+{% endif %}

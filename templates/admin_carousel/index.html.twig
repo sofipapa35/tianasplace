@@ -1,0 +1,37 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Carousel{% endblock %}
+
+{% block body %}
+    <h1>Carousel</h1>
+    <a href="{{ path('admin_carousel_new') }}" class="btn btn-warning">Nouveau</a>
+
+    <table class="table t-overflow">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ImageName</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carousel in carousels %}
+            <tr>
+                <td>{{ carousel.id }}</td>
+                <td>{{ carousel.imageName }}</td>
+                <td>{{ carousel.updatedAt ? carousel.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_carousel_show', {'id': carousel.id}) }}" class="btn btn-primary"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('admin_carousel_edit', {'id': carousel.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune entrée trouveé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

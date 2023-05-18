@@ -1,0 +1,61 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Nouveau Timeline
+{% endblock %}
+
+{% block body %}
+	<h1>Créer un nouveau Timeline</h1>
+	<a href="{{ path('admin_timeline_index') }}" class="btn btn-secondary">Retourner à la liste</a>
+
+	<div class="text-end mb-2">* Champs obligatoires</div>
+	{{ form_start(form) }}
+	{{ form_row(form.title) }}
+	{{ form_row(form.description) }}
+	{{ form_row(form.dateActu) }}
+
+	{# Champ de photo #}
+	<ul class="photos" data-index="{{ form.photos|length > 0 ? form.photos|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.photos.vars.prototype)|e('html_attr') }}">
+		<li>{{ form_row(form.photos) }}</li>
+	</ul>
+
+	{# Bouton d'ajout #}
+	<button type="button" class="add_item_link btn btn-success" data-collection-holder-class="photos">Add a photo</button><br>
+	<button class="btn btn-primary mt-2">{{ button_label|default('Sauvegarder') }}</button>
+
+	{{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+	<script>
+	// Création du nouvel li
+		const addFormToCollection = (e) => {
+const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+const item = document.createElement('li');
+item.innerHTML = collectionHolder.dataset.prototype.replace(/__name__/g, collectionHolder.dataset.index);
+collectionHolder.appendChild(item);
+collectionHolder.dataset.index ++;
+addTagFormDeleteLink(item);
+};
+
+document.querySelectorAll('.add_item_link').forEach(btn => {
+btn.addEventListener("click", addFormToCollection)
+});
+
+// Création du bouton "Delete"
+const addTagFormDeleteLink = (item) => {
+const removeFormButton = document.createElement('button');
+removeFormButton.className = "btn btn-danger";
+removeFormButton.innerText = 'Delete this photo';
+
+item.append(removeFormButton);
+
+removeFormButton.addEventListener('click', (e) => {
+e.preventDefault();
+// Suppression du li
+item.remove();
+});
+}
+document.querySelectorAll('ul.tags li').forEach((photo) => {
+addTagFormDeleteLink(photo)
+})
+	</script>
+{% endblock %}

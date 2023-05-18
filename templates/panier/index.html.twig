@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mon Panier
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Mon Panier</h1>
+	</div>
+
+	{% if panier.fullPanier|length > 0 %}
+		<div class="t-container h-block-common p-4 my-3">
+			<div class="table-responsive" id="detail-panier">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="fw-light">Produit</th>
+							<th></th>
+							<th class="text-center fw-light">Quantité</th>
+							<th class="text-end fw-light">Prix</th>
+							<th class="text-end fw-light">Prix total</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for produit in panier.fullPanier %}
+							<tr>
+								<td class="col-2"><img src="{{asset('images/menu/' ~ produit.product.ImageName)}}" alt="{{produit.product.title}}" class="img-fluid"></td>
+								<td>
+									<b>{{produit.product.title}}</b>
+								</td>
+								<td class="text-center">
+									<a href="{{path('panier_remove', {'id': produit.product.id})}}">
+										<i class="fa fa-circle-minus"></i>
+									</a>
+
+									{{produit.quantite}}
+
+									<a href="{{path('panier_add', {'id': produit.product.id})}}">
+										<i class="fa fa-circle-plus"></i>
+									</a>
+								</td>
+
+								<td class="text-end">{{produit.product.price|number_format(2)}}
+									€</td>
+								<td class="text-end">{{produit.total|number_format(2)}}€</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="total">
+				<div class="total2">
+					<p class="text-center">Nombre de produits:
+						<b>{{panier.totalPieces}}</b>
+					</p>
+					<p class="text-center">Prix total:
+						<b>{{panier.totalPrix|number_format(2)}}</b>
+						€</p>
+					<a href="{{path('commande_detail')}}" class="btn btn-dark w-100">Valider mon panier</a>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div class="t-container p-4 my-3">
+			<p>Votre panier est vide</p>
+		</div>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<h1>N° commande
+	{{commande.id}}</h1>
+
+<p>Bonjour
+	<span class="text-green">
+		{{commande.user.firstname}}
+		{{commande.user.name}}</span>,
+	<br>
+	Il semblerait que votre paiement est échoué pour votre commande n°
+	<span class="text-green">{{commande.id}}</span>.
+	<br>
+	<hr>
+	<a href="{{absolute_url(path('commande_detail'))}}">Réessayer le paiement</a>
+</p>

@@ -1,0 +1,14 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Modifier le menu
+{% endblock %}
+
+{% block body %}
+	<h1>Modifier le menu</h1>
+	<a href="{{ path('admin_product_index') }}" class="btn btn-secondary">Retourner à la liste</a>
+
+	{{ include('admin_product/_form.html.twig', {'button_label': 'Update'}) }}
+
+	
+	{{ include('admin_product/_delete_form.html.twig') }}
+{% endblock %}

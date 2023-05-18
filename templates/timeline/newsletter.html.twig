@@ -1,0 +1,16 @@
+<h1>{{timeline.title}}</h1>
+
+<div class="d-flex">
+    {% for photo in timeline.photos %}    
+        <img src="{{'http://127.0.0.1:8000/images/timeline/' ~ photo.imageName}}" class="img-fluid" alt="{{timeline.title}}" style="width: 200px;">
+    {% endfor %}
+</div>
+<p>
+    Le {{timeline.dateActu|date("d/m/Y")}} :
+</p>
+<p>
+    {{timeline.description|raw}}
+</p>
+{# Lien de la désinscription #}
+<p>Pour vous désincrire, cliquez sur ce lien <a href="{{absolute_url(path('newsletters_unsubscribe', {id: membre.id, token: membre.validationToken}))}}">{{absolute_url(path('newsletters_unsubscribe', {id: membre.id, token: membre.validationToken}))}}</a></p>
+

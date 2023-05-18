@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+{{ form_row(form.title) }}
+{% if product.imageName %}
+	<div class="edit-img">
+		<a href="{{ path('remove-photo-carte', {"id": product.id})}}" class="text-dark p-1">
+			<i class="close-icon" data-feather="x-circle" title="Supprimer"></i>
+			<img src="{{asset('images/menu/' ~ product.imageName)}}" alt="{{product.title}}" class="p-1 edit-image">
+		</a>
+	</div>
+{% endif %}
+{{ form_row(form.imageFile) }}
+{{ form_row(form.description) }}
+{{ form_row(form.price) }}
+{{ form_row(form.category) }}
+{{ form_row(form.addCart) }}
+{{ form_row(form.active) }}
+<button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue chez Tiana's !
+{% endblock %}
+
+{% block body %}
+	{# -------------------- Carousel ---------------------- #}
+
+	<div id="carouselExampleCaptions" class="carousel slide mb-4" data-bs-ride="carousel">
+		<div class="carousel-indicators">
+			{% for carousel in carousel %}
+				{% if loop.index0 == 0 %}
+					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				{% else %}
+					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{ loop.index0 }}" aria-label="Slide 2"></button>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="carousel-inner">
+			{% for carousel in carousel %}
+				{% if loop.index0 == 0 %}
+					{% set active = "active" %}
+				{% else %}
+					{% set active = "" %}
+				{% endif %}
+				<div class="carousel-item {{ active }}">
+					<img src="{{ asset('/images/carousel/' ~ carousel.imageName)}}" class="d-block w-100" alt="{{ 'Bienvenue' }}">
+					<div class="carousel-caption d-none d-md-block"></div>
+				</div>
+			{% endfor %}
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+
+
+	{# -------------------- Main ---------------------- #}
+	<div class="row g-2">
+		{# <div class="col-12 h-block-common my-2 py-2 py-md-4 pe-3 text-end">
+			<h1>Tiana's Place</h1>
+		</div> #}
+
+		<div class="col-12 col-lg-6 d-flex align-items-stretch">
+			<div class="h-block-common home-text1">
+				<p class="lead el m-0">La célèbre princesse et chef vous accueille dans son nouveau restaurant à Paris, afin de vous offrir une merveilleuse soirée, avec de la musique jazz et une cuisine délicieuse inspirée du sud-américain</p>
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-6 d-flex align-items-stretch">
+			<div class="h-block-common w-100 home-text1">
+				<h2 class="text-center">Horaires</h2>
+				<hr>
+				<p class="lead text-center">Du lundi au dimanche:
+					<br>18h - minuit</p>
+			</div>
+		</div>
+
+		<div class="col-12 h-block-common my-3 py-2 pe-3 d-flex justify-content-center img-fluid">
+			<img src="images/logo - home/michelin-etoile.png" alt="etoile michelin">
+		</div>
+
+		<div class="col-12 h-block-common my-3 px-3 py-5 d-flex flex-column flex-lg-row justify-content-around align-items-center">
+			<div>
+				<h2 class="text-center pb-2">Adresse</h2>
+				<hr class="text-white">
+				<p class="lead mb-4 text-center">Quai de Conti, 75006 Paris</p>
+				<h2 class="text-center pb-2">Téléphone</h2>
+				<hr class="text-white">
+				<p class="lead text-center">01.23.56.32.85</p>
+			</div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2477.7246459294456!2d2.3396107876712455!3d48.85710643047177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe43a9eb21d3d7b3c!2zNDjCsDUxJzI1LjIiTiAywrAyMCcxOS4wIkU!5e0!3m2!1sel!2sgr!4v1644960169814!5m2!1sel!2sgr" allowfullscreen="" loading="lazy" class="map"></iframe>
+		</div>
+	</div>
+
+	<div id="block4">
+		<div class="col-12 col-lg-6 mt-2 mt-lg-0 me-1 h-block-common bloc-menu">
+			<a href="{{ path('la_carte_categorie', {'title': "all"}) }}" class="d-flex justify-content-center align-items-center">
+				<img src="{{asset('images/logo - home/menu.jpg')}}" class="img-fluid image-menu"></img>
+			<div class="middle btn btn-dark px-3 py-4 text-menu">Consultez la carte</div>
+		</a>
+	</div>
+
+	<div class="col-12 col-lg-6 ms-1 d-flex justify-content-center align-items-center h-block-common home-text1">
+		<div class="d-flex flex-column justify-content-center align-items-center">
+			<h2 class="text-center">Reservez une table</h2>
+			<hr>
+			<p class="lead text-center">Appelez au 01.23.56.32.85</p>
+			<p class="lead text-center">ou</p>
+			<div>
+				<a href="{{ path('disponibility') }}" class="btn btn-dark lead text-center m-auto px-3 py-4">Remplissez le formulaire</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

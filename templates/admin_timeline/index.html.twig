@@ -1,0 +1,43 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Timeline{% endblock %}
+
+{% block body %}
+    <h1>Timeline</h1>
+    <a href="{{ path('admin_timeline_new') }}" class="btn btn-warning">Nouveau</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>DateActu</th>
+                <th class="text-center">Envoyer</th>
+                <th class="text-end">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for timeline in timelines %}
+            <tr>
+                <td>{{ timeline.id }}</td>
+                <td>{{ timeline.title }}</td>
+                <td>{{ timeline.dateActu ? timeline.dateActu|date('d-m-Y') : '' }}</td>
+                {% if timeline.isSend %}
+                    <td class="text-center"><i class="align-middle" data-feather="check"></i></td>
+                {% else %}
+                    <td class="text-center"><a href="{{ path('admin_send', {'id': timeline.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="send"></i>Envoyer</a></td>
+                {% endif %}
+                <td class="text-end">
+                    <a href="{{ path('admin_timeline_show', {'id': timeline.id}) }}" class="btn btn-primary mb-1 mb-md-0"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('admin_timeline_edit', {'id': timeline.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune entrée trouveé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

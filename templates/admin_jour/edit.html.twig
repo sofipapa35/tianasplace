@@ -1,0 +1,12 @@
+{% extends 'base-admin.html.twig' %}
+{% block title %}Modifier Jour{% endblock %}
+
+{% block body %}
+    <h1>Modifier Jour</h1>
+    <a href="{{ path('admin_jour_index') }}" class="btn btn-secondary">Retourner à la liste</a> 
+
+    {{ include('admin_jour/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    {{ include('admin_jour/_delete_form.html.twig') }}
+{% endblock %}

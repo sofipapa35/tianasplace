@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande
+{% endblock %}
+
+{% block body %}
+	<div class="d-md-flex">
+		<div class="col-md-5 pe-1">
+			<div
+				class="h-block-common p-4 my-3">
+				{# User details #}
+				<h3>Details du client</h3>
+				<p class="colorTextWhite">
+					<i class="fa-solid fa-user"></i>
+					{{user.name}}
+					{{user.firstname}}</p>
+				<p class="colorTextWhite">
+					<i class="fa-solid fa-phone-flip"></i>
+					{{user.telephone}}</p>
+				<p class="colorTextWhite">
+					<i class="fa-solid fa-at"></i>
+					{{user.email}}</p>
+			</div>
+			<div class="h-block-common p-4 my-3">
+				<h3>Adresse de livraison</h3>
+				{% if user.address and user.zip and user.ville %}
+					<p class="colorTextWhite">{{user.address}}
+						<br>
+						{{user.zip}},
+						{{user.ville}}</p>
+				{% else %}
+					{{form_start(profile_form)}}
+					<div class="row">
+						<div class="col-12">{{ form_row(profile_form.address) }}</div>
+						<div class="col-12 col-md-6">{{ form_row(profile_form.zip) }}</div>
+						<div class="col-12 col-md-6">{{ form_row(profile_form.ville) }}</div>
+					</div>
+					<button type="submit" class="btn btn-dark">Ajouter l'address</button>
+					{{form_end(profile_form)}}
+				{% endif %}
+			</div>
+			<div
+				class="h-block-common p-4 my-3">
+				{# Modifier les données du user #}
+				<p class="colorTextWhite">Souhaitez-vous modifier vos données?</p>
+				<a href="{{path('profile')}}" class="btn btn-dark w-100">Modifier mes données</a>
+			</div>
+		</div>
+
+		<div
+			class="col-md-7 ps-1">
+			{# Les produits #}
+			<div class="h-block-common p-4 my-3">
+				<h3>Produits</h3>
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							{% for produit in commande.fullPanier %}
+								<tr>
+									<td class="col-2"><img src="{{asset('images/menu/' ~ produit.product.ImageName)}}" alt="{{produit.product.title}}" class="img-fluid"></td>
+									<td class="colorTextWhite">
+										<b>{{produit.product.title}}</b>
+										<br>
+										x{{produit.quantite}}<br>
+										<small>{{produit.product.price|number_format(2)}}
+											€</small>
+									</td>
+									<td class="text-end colorTextWhite">Total :
+										{{produit.total|number_format(2)}}€</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<a>
+						<div>
+							<h3 class="text-center colorTextWhite">Total :</h3>
+						</div>
+						<div>
+							<p class="text-center colorTextWhite">Nombre de produits:
+								<b>{{commande.totalPieces}}</b>
+							</p>
+							<p class="text-center colorTextWhite">Prix total:
+								<b>{{commande.totalPrix|number_format(2)}}</b>
+								€</p>
+						</div>
+					</div>
+
+					<p>
+						{% if count != 0 %}
+							<div class="bg-dark text-center py-2 w-100">Veuillez remplir votre
+								{% for key, value in infos %}
+									{% if not value %}
+										-{{key|upper}}-
+									{% endif %}
+								{% endfor %}
+							</div>
+						{% else %}
+							<a href="{{path('stripe')}}" class="btn btn-dark w-100">Payer |
+								{{commande.totalPrix|number_format(2)}}
+								€</a>
+						{% endif %}
+					</p>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Details</h1>
+	</div>
+	<div class="h-block-common my-3 p-3">
+	<div class="text-end my-2"><a href="{{path('profile')}}">Retour</a></div>
+		<table class="table">
+			<thead>
+			<tr>
+			<th scope="col" class="text-green" colspan="5">N° commande : {{detail[0].commande.id}}</th>
+			</tr>
+				<tr>
+					<th scope="col" class="text-green">Produit</th>
+					<th scope="col" class="text-green"></th>
+					<th scope="col" class="text-center text-green">Quantité</th>
+					<th scope="col" class="text-end text-green">Prix</th>
+					<th scope="col" class="text-end text-green">Prix Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in detail %}
+					<tr class="">
+					{% set element = item.product|split(',') %}
+
+						<td><img src="{{asset('images/menu/' ~ element[1]|trim)}}" alt="{{element[1]}}" style="width: 100px;"></td>
+						<td class="align-middle">{{element[2]|trim}}</td>
+						<td class="text-center align-middle">{{item.qnt}}</td>
+						<td class="text-end align-middle">{{item.price|number_format(2)}}
+							€</td>
+						<td class="text-end align-middle">{{item.total|number_format(2)}}
+							€</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

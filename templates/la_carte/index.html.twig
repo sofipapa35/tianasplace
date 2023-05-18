@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Carte
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>La carte</h1>
+	</div>
+	<nav class="nav-carte my-3">
+		<a href="{{path('la_carte_categorie', {'title':categories[0].title})}}" class="link-carte">
+			<div class="button-carte {% if app.request.attributes.get('_route_params')['title'] == categories[0].title %}active{% endif %}">{{categories[0].title}}</div>
+		</a>
+		{% for category in categories %}
+			{% if loop.index0 != 0 %}
+				<a href="{{path('la_carte_categorie', {'title':category.title})}}" class="link-carte">
+					<div class="button-carte {% if app.request.attributes.get('_route_params')['title'] == category.title %}active{% endif %}">{{category.title}}</div>
+				</a>
+			{% endif %}
+		{% endfor %}
+	</nav>
+
+	<div class="my-3">
+		<div class="h-block-common my-2 p-3">
+			<h3 class="text-start">{{product_category[0].title}}</h3>
+		</div>
+		<div class="row g-0 my-3">
+			{% for produit in product_category[0].product %}
+				{% if produit.active %}
+					<div class="col-md-3 p-1 my-2 d-flex align-items-stretch carte-items">
+						<div class="card d-flex justify-content-between">
+							{% if produit.imageName %}
+								<img src="{{ asset('images/menu/' ~ produit.imageName) }}" alt="{{produit.title}}" class="img-list">
+							{% else %}
+								<img src="{{ asset('images/default/laCarte-fork-knif.jpg') }}" alt="{{produit.title}}" class="img-list">
+							{% endif %}
+							<div class="card-body">
+								<div id="menu-pb">
+									<h4 class="card-title">{{produit.title}}</h4>
+									{% if produit.description|length|raw > 54 %}
+										<div class="card-text">{{produit.description|slice(0,50)|raw}}
+											...
+											<a href="{{path("la_carte_detail", {id: produit.id})}}">
+												Lire plus</a>
+										</div>
+									{% else %}
+										<div class="card-text">{{produit.description|raw}}</div>
+									{% endif %}
+								</div>
+							</div>
+							<div>
+								<div class="mt-2 mb-1">
+									<p class="card-text mb-2 ms-3">
+										<b>Prix:
+											{{produit.price|number_format(2)}}€</b>
+									</p>
+									{% if produit.addCart %}
+										<a href="{{path("panier_add", {id: produit.id})}}" class="btn btn-dark w-100">Ajouter au panier</a>
+									{% else %}
+										<a href="#" class="btn btn-dark w-100 invisible">Ajouter au panier</a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

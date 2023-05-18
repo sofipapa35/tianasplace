@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualities
+{% endblock %}
+
+{% block body %}
+
+	{% set x = 0 %}
+	{% set index1 = 0 %}
+	<div class="timel">
+		{% set i = 1 %}
+		{% for timeline in timeline %}
+			{% if x % 2 == 0 %}
+				{% set side = "gauche" %}
+			{% else %}
+				{% set side = "droite" %}
+			{% endif %}
+			<div class="contain {{side}}">
+				<div class="time-body border h-block-common" id="co">
+					<h3>{{timeline.title}}</h3>
+					<h4 class="w-100">{{timeline.dateActu|date("d/m/Y")}}</h4>
+					{% set index2 = 0 %}
+					{% for photo in timeline.photos %}
+						<div class="row">
+							{% if loop.index0 == 0 %}
+								<div class="div-img-time"><img src="{{asset('images/timeline/' ~ photo.imageName)}}" class="img-fluid main-pict"></div>
+							{% else %}
+								<div class="column-grid m-2">
+									<img src="{{asset('images/timeline/' ~ photo.imageName)}}" class="img-fluid thumbs" style="width:100px">
+								</div>
+							{% endif %}
+						</div>
+			{% set index2 = index2 + 1 %}
+					{% endfor %}
+					<p class="lead w-100">{{timeline.description|raw}}</p>
+				</div>
+			</div>
+			{% set x = x + 1 %}
+			{% set index1 = index1 + 1 %}
+		{% endfor %}
+	</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+// Mise en place du click sur les thumbs
+$(".thumbs").on("click", function(){
+	var mainPict = $(this).closest(".time-body").find('.main-pict').attr("src");
+	var swapPict = $(this).attr("src");
+	 $(this).closest(".time-body").find('.main-pict').attr("src", swapPict);
+	 $(this).attr("src", mainPict);
+});
+</script>
+{% endblock %}

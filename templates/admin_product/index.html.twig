@@ -1,0 +1,59 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Le menu
+{% endblock %}
+
+{% block body %}
+	<h1>Le menu</h1>
+	<a href="{{ path('admin_product_new') }}" class="btn btn-warning">Nouveau</a>
+	<div class="t-overflow">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					{# <th>Id</th> #}
+					<th>Titre</th>
+					<th>Prix</th>
+					<th>UpdatedAt</th>
+					<th class="text-center">Active</th>
+					<th class="text-center">Delivery</th>
+					<th class="text-end">actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>
+							{% if product.imageName %}
+								<img src="{{ asset('images/menu/' ~ product.imageName) }}" alt="{{product.title}}" class="img-list">
+							{% else %}
+								<img src="{{ asset('images/default/laCarte-fork-knif.jpg') }}" alt="{{product.title}}" class="img-list">
+							{% endif %}
+						</td>
+						{# <td>{{ product.id }}</td> #}
+						<td>{{ product.title }}</td>
+						<td>{{ product.price }} €</td>
+						<td>{{ product.updatedAt ? product.updatedAt|date('d-m-Y H:i:s') : '' }}</td>
+						<td class="text-center">{{ product.active ? '<i class="align-middle" data-feather="check"></i>' : '<i class="align-middle" data-feather="x"></i>' }}</td>
+						<td class="text-center">{{ product.addCart ? '<i class="align-middle" data-feather="check"></i>' : '<i class="align-middle" data-feather="x"></i>' }}</td>
+						<td class="text-end">
+							<a href="{{ path('admin_product_show', {'id': product.id}) }}" class="btn btn-primary mb-sm-2 mb-md-0">
+								<i class="align-middle" data-feather="eye"></i>
+							</a>
+							<a href="{{ path('admin_product_edit', {'id': product.id}) }}" class="btn btn-success">
+								<i class="align-middle" data-feather="edit"></i>
+							</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7">Aucune entrée trouveé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<div class="navigation">
+		{{ knp_pagination_render(products)}}
+	</div>
+{% endblock %}

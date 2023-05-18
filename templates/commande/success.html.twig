@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de la commande
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Confirmation de la commande</h1>
+	</div>
+
+	<div class="h-block-common p-4 my-3">
+		<p>Bonjour
+			<span class="text-green">
+				{{commande.user.firstname}}
+				{{commande.user.name}}</span>,
+			<br>
+			Nous vous remercions pour votre commande n°
+			<span class="text-green">{{commande.id}}</span>.
+			<br>
+			Une confirmation vient de vous être envoiyée par email à l'adresse
+			<span class="text-green">{{commande.user.email}}</span>.
+			<br>
+			{% set adresse = commande.delivery|split('<br>') %}
+			Votre commande sera bientôt livrée à l'adresse
+			<span class="text-green">{{adresse[1]}}</span>
+		</p>
+		<hr>
+		Pour suivre votre commande, rendez-vous dans le rubrique commande de votre
+		<a href="{{path('profile')}}">espace personnel</a>
+		.
+	</div>
+{% endblock %}

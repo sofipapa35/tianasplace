@@ -1,0 +1,25 @@
+.img-list{
+    width: 100px;
+}
+.t-overflow{
+    overflow: auto;
+}
+tr th:last-child{
+    width: 15%;
+}
+tr td:last-child{
+    width: 15%;
+}
+.edit-img{
+    position: relative;
+    width: 300px;
+}
+.close-icon{
+    position: relative;
+    z-index: 50;
+}
+.edit-image{
+    position: relative;
+    z-index: 40;
+    width: 300px;
+}

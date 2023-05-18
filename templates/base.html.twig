@@ -1,19 +1,178 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<!-- CSS only -->
+		<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link
+		href="https://fonts.googleapis.com/css2?family=Ballet&family=Bona+Nova:ital@1&family=Comforter&family=Cookie&family=Great+Vibes&family=Jomolhari&family=Lora:wght@500&family=Mea+Culpa&family=Neonderthaw&family=Open+Sans:ital,wght@1,700&family=Playfair+Display:ital@0;1&family=Rock+Salt&family=Vollkorn+SC:wght@900&display=swap" rel="stylesheet">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		<!-- CSS -->
+		<link
+		rel="stylesheet" href="{{asset('css/style-front.css')}}">
+		<!-- Font awsome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer"/> {% block stylesheets %}{% endblock %}
+		</head>
+		<body>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="{{path('home')}}">
+						<img src="{{asset('images/logo - home/frog-light.png')}}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+						Tiana's Place
+					</a>
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+
+						<ul class="navbar-nav ml-auto ms-auto">
+							<li class="nav-item menulink mx-sm-auto text-center {{ app.request.get('_route') == 'la_carte_categorie' ? 'active' }}">
+								<a class="nav-link menulinka" href="{{ path('la_carte_categorie', {'title': "Apéritifs"}) }}">La Carte</a>
+							</li>
+							<li class="nav-item menulink mx-sm-auto text-center {{ app.request.get('_route') == 'comment' ? 'active' }}">
+								<a class="nav-link menulinka" href="{{ path('comment') }}">Avis</a>
+							</li>
+							<li class="nav-item menulink mx-sm-auto text-center {{ app.request.get('_route') == 'timeline' ? 'active' }}">
+								<a class="nav-link menulinka" href="{{ path('timeline') }}">Actualités</a>
+							</li>
+							<li class="nav-item menulink mx-sm-auto text-center {{ app.request.get('_route') == 'contact' ? 'active' }}">
+								<a class="nav-link menulinka" href="{{ path('contact') }}">Contact</a>
+							</li>
+							<li class="nav-item menulink mx-sm-auto text-center {{ app.request.get('_route') == 'disponibility' ? 'active' }}">
+								<a class="nav-link menulinka" href="{{ path('disponibility') }}">Reservation</a>
+							</li>
+							<div class="d-flex justify-content-center">
+								<li class="nav-item menulink d-flex align-items-center ps-2 pe-1 position-relative {{ app.request.get('_route') == 'panier_index' ? 'active' }}">
+									<a href="{{ path('panier_index') }}" class="tray text-dark nav-link menulinka" title="Panier">
+										<i class="text-light fa-solid fa-bag-shopping"></i>
+									</a>
+									<span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+										{{ render(controller('App\\Controller\\PanierController::getArticles')) }}
+									</span>
+								</li>
+								{% if is_granted('ROLE_USER') %}
+									<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'profile' ? 'active' }}">
+										<a href="{{ path('profile', {'id': 0}) }}" class="tray text-light nav-link menulinka" title="Profil">
+											<span class="m-2">{{app.user.firstName}}
+												{{app.user.name}}</span>
+											<i class="fa-solid fa-user"></i>
+										</a>
+									</li>
+									<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'app_logout' ? 'active' }}">
+										<a href="{{ path('app_logout') }}" class="text-light tray nav-link menulinka" title="Se deconnecter">
+											<i class="fas fa-sign-out-alt ms-2"></i>
+										</a>
+									</li>
+								{% else %}
+									<li class="nav-item menulink d-flex align-items-center px-2 {{ app.request.get('_route') == 'app_login' ? 'active' }}">
+										<a href="{{ path('app_login') }}" class="text-light tray nav-link menulinka" title="Se connecter">
+											<i class="fas fa-sign-in-alt"></i>
+										</a>
+									</li>
+								{% endif %}
+							</li>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</body>
+	</html>
+</nav>
+
+
+<div
+	class="container p-0">
+
+
+	{# ----------------- FLASH MESSAGE ----------------- #}
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" id="alert-n" role="alert">{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger" id="alert-n" role="alert">{{ message }}
+		</div>
+	{% endfor %}
+
+
+	{% block body %}{% endblock %}
+
+</div>
+
+<footer class="mt-4 container p-0">
+
+	<section>
+		<div class="newsletter p-4">
+			<h2 class="text-center mt-3">Newsletter</h2>
+			<p class="text-center">Abonnez-vous à la newsletter</p>
+
+			{{ render(controller('App\\Controller\\MemberController::index')) }}
+
+		</div>
+	</section>
+
+	<div class="footer-basic">
+		<div class="social">
+			<a href="#">
+				<i class="icon ion-social-instagram"></i>
+			</a>
+			<a href="#">
+				<i class="icon ion-social-snapchat"></i>
+			</a>
+			<a href="#">
+				<i class="icon ion-social-twitter"></i>
+			</a>
+			<a href="#">
+				<i class="icon ion-social-facebook"></i>
+			</a>
+		</div>
+		<ul class="list-inline">
+			<li class="list-inline-item">
+				<a href="{{path('home')}}">Home</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="#">La Carte</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="{{ path('contact') }}">Contact</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="{{ path('disponibility') }}">Reservation</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="#">Terms</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="#">Privacy Policy</a>
+			</li>
+		</ul>
+		<p class="copyright">Tiana's Place ©
+			{{ 'now'|date('Y') }}</p>
+	</div>
+</footer>
+
+<!-- JavaScript Bundle with Popper -->
+{# ------------------ jQuery ------------------- #}
+<script src="{{ asset('js/jquery-3.6.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+{% block javascripts %}{% endblock %}
+{% block javascript %}{% endblock %}
+{% block script %}{% endblock %}</body></html>

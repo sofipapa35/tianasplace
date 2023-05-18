@@ -1,0 +1,45 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Disponibilities{% endblock %}
+
+{% block body %}
+    <h1>Disponibilities</h1>
+
+    <a href="{{ path('admin_jour_index') }}" class="btn btn-warning m-1">Ajouter une periode</a>
+    <a href="{{ path('admin_disponibility_new') }}" class="btn btn-warning m-1">Nouveau</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th><i class="align-middle" data-feather="calendar"></i>Date</th>
+                <th><i class="align-middle" data-feather="clock"></i>Horaires</th>
+                <th class="text-center"><i class="align-middle" data-feather="user"></i>Nombre de personnes</th>
+                <th class="text-center">Nombre de places</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for disponibilities in disponibility %}
+            <tr>
+                <td>{{ disponibilities.id }}</td>
+                <td><i class="align-middle" data-feather="calendar"></i> {{ disponibilities.jour }}</td>
+                <td><i class="align-middle" data-feather="clock"></i> {{ disponibilities.heure }}</td>
+                <td class="text-center"><i class="align-middle" data-feather="user"></i> {{ disponibilities.personnes }}</td>
+                <td class="text-center">{{ disponibilities.count }}</td>
+                <td class="text-end">
+                    <a href="{{ path('admin_disponibility_show', {'id': disponibilities.id}) }}" class="btn btn-primary"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('admin_disponibility_edit', {'id': disponibilities.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune entrée trouveé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+	<div class="navigation">
+		{{ knp_pagination_render(disponibility)}}
+	</div>
+{% endblock %}

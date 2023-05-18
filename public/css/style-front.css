@@ -1,0 +1,526 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* background-color: #260f01; */
+  /* background-color: #ccc; */
+  /* background-image: url("../images/logo - home/frog-patern3.png"); */
+  color: #ccc;
+  font-family: Helvetica, Arial, sans-serif;
+  position: relative;
+}
+th, td{
+  color: #ccc;
+}
+p{
+  line-height: 1.5;
+  font-size: 16px;
+}
+h1, h2, h3, h4{
+  font-family: "Mea Culpa", cursive;
+  text-align: right;
+  color: #98a67b;
+}
+h1{
+  line-height: 1;
+  font-size: 64px;
+}
+h2{
+  line-height: 1.1;
+  font-size: 48px;
+}
+h3{
+  line-height: 1.2;
+  font-size: 32px;
+}
+p, td, th{
+  color: black;
+}
+
+/* .navbar{
+  background-color: #f2edd0;
+} */
+.menulink.active{
+  border-bottom: #98a67b solid 2px;
+  height: 38px;
+}
+.menulink.active:hover{
+  border-bottom: none;
+}
+.menulinka:hover{
+  height: 38px;
+  border-bottom: #98a67b solid 2px;
+  text-decoration: none;
+}
+.navbar-brand:hover{
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+  color: #98a67b ;
+}
+
+/* ~~~~~~~~~~~~~~~~~ HOME ~~~~~~~~~~~~~~~~ */
+.h-block-common {
+  /* background-color: #f2edd0; */
+  border-radius: 15px;
+  border-color: #f2edd0;
+  border-style: solid;
+}
+.home-text1{
+  padding: 100px 50px;
+}
+.el::first-letter {
+  color: #98a67b;
+  padding: 0 0.3rem;
+  margin: 0 0.6rem 0 0;
+  font-size: 90px;
+  /* border: 2px solid; */
+  /* border-radius: 8px; */
+  font-family: "Ballet", cursive;
+  float: left;
+  line-height: 1;
+}
+#block4{
+  display: flex;
+}
+
+.bloc-menu{
+  position: relative;
+}
+.image-menu{
+  opacity: 1;
+  display: block;
+  width: 70%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;  
+  border-radius: 15px;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.bloc-menu:hover .image-menu {
+  opacity: 0.3;
+}
+
+.bloc-menu:hover .middle {
+  opacity: 1;
+}
+.text-menu {
+  font-size: 32px;
+  font-family: "Mea Culpa", cursive;
+}
+.map{
+  width: 400px;
+  height: 300px;
+}
+
+/* ~~~~~~~~~~~~~~~~ FORMS ~~~~~~~~~~~~~~~~ */
+.form-label,
+.form-check-label {
+  color: #ccc;
+}
+#registration_form_agreeTerms {
+  display: block;
+}
+a, .text-green{
+  color: #98a67b;
+  text-decoration: none;
+}
+/* a:hover{
+  color: #98a67b;
+  text-decoration: underline;
+} */
+
+/* ~~~~~~~~~~~~ CARDS LA CARTE ~~~~~~~~~~~ */
+.nav-carte{
+  display: flex;
+}
+.button-carte{
+  border-radius: 0 20px;
+  padding: 15px 20px;
+  margin: 2px;
+  cursor: pointer;
+}
+.button-carte a{
+  text-decoration: none;
+}
+.button-carte a:hover{
+  color: #98a67b;
+}
+.button-carte.active{
+  border-bottom: #98a67b solid 2px;
+}
+.button-carte:hover{
+  border-bottom: #98a67b solid 2px;
+}
+
+.card-text{
+  color: #260f01;
+}
+
+/* ~~~~~~~~~~~~~ COMMENTAIRES ~~~~~~~~~~~~ */
+
+.transparent-block{
+  background-color: rgba(0,0,0, 0.5);
+  border: solid 1px #ccc;
+}
+.avatar-right{
+  /* float: right; */
+  max-width: 60px;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.h-block-common .avis{  
+  font-family: 'Cookie', cursive;
+}
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+/* ~~~~~~~~~~~~~~~~ LOGIN ~~~~~~~~~~~~~~~~ */
+
+
+/* ~~~~~~~~~~~~~~~~ FOOTER ~~~~~~~~~~~~~~~ */
+.footer-basic {
+  padding:40px 0;
+  background-color:black;
+  color:#ccc;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:1;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#ccc;
+  margin-bottom:0;
+}
+
+/* ~~~~~~~~~~~~~~~ TIMELINE ~~~~~~~~~~~~~~ */
+.timel {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+/* La ligne verticale */
+.timel::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: black;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.contain {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+/* Le point */
+.contain::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -12px;
+  background-color: white;
+  border: 4px solid #98a67b;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Le container gauche */
+.gauche {
+  left: 0;
+}
+
+/* Le container droite */
+.droite {
+  left: 50%;
+}
+
+/* Les fleches des containeurs gauches */
+.gauche::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent black;
+}
+
+/* Les fleches des containeurs droites */
+.droite::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent black transparent transparent;
+}
+
+/* Le point droite */
+.droite::after {
+  left: -13px;
+}
+
+/* Le contenu réel */
+.time-body {
+  padding: 20px 30px;
+  position: relative;
+  border-radius: 6px;
+  width: 30;
+}
+
+/* Media queries */
+@media screen and (max-width: 600px) {
+  /* Place the timelime to the left */
+  .timel::after {
+  left: 31px;
+  }
+  
+  /* Conteneurs pleine largeur */
+  .contain {
+  width: 100%;
+  padding-left: 70px;
+  padding-right: 25px;
+  }
+  
+  /* toutes les flèches pointent vers la gauche */
+  .contain::before {
+  left: 60px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+  }
+
+  /* Tous les points sont au même endroit */
+  .gauche::after, .droite::after {
+  left: 18px;
+  }
+  
+  /* Tous les conteneurs de droite se comportent comme ceux de gauche */
+  .droite {
+  left: 0%;
+  }
+}
+
+/* ~~~~~~~~~~~~~~ NEWSLETTER ~~~~~~~~~~~~~ */
+.newsletter{
+  background-image: url("../images/logo - home/stars.jpg");
+}
+
+/* ~~~~~~~~~~~~~~~~ Grid ~~~~~~~~~~~~~~~ */
+#co{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* ~~~~~~~~~~~~~~~~ Profil ~~~~~~~~~~~~~~~ */
+#blockUser, #blockPass, .details{
+  display: none;
+}
+#home-tab, #commandes-tab, #reservations-tab{
+  color: #ccc;
+}
+#home-tab:hover, #commandes-tab:hover, #reservations-tab:hover, .link-carte:hover{
+  text-decoration: none;
+  color: #98a67b;
+}
+#home-tab.active, #commandes-tab.active, #reservations-tab.active{
+  color: #260f01;
+}
+.navItemCard{
+  background-color: black;
+}
+/* ~~~~~~~~~~~~~~~~ Media queries ~~~~~~~~~~~~~~~ */
+@media (max-width: 992px) {
+  #block4{    
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .image-menu{
+    width: 50%;
+  }
+  .text-menu{
+    opacity: 0.5;
+  }
+}
+@media (max-width: 768px) {
+  h1{
+    font-size: 52px;
+  }
+  h2{
+    font-size: 42px;
+  }
+  h3{
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1{
+    font-size: 48px;
+  }
+  h2{
+    font-size: 36px;
+  }
+  h3{
+    font-size: 24px;
+  }
+  p{
+    font-size: 12px;
+  }
+  .text-menu {
+    font-size: 24px;
+  }
+  .image-menu{
+    width: 100%;
+  }  
+  .map{
+    width: 200px;
+    height: 200px;
+  }
+}
+.test{
+  color: red;
+}

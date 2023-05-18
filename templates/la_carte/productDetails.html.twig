@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product_detail[0].title}}
+{% endblock %}
+
+{% block body %}
+	<div class="col-md-5 container my-4">
+		<div class="card">
+			{% if product_detail[0].imageName %}
+				<img src="{{ asset('images/menu/' ~ product_detail[0].imageName) }}" alt="{{product_detail[0].title}}" class="img-list">
+			{% else %}
+				<img src="{{ asset('images/default/laCarte-fork-knif.jpg') }}" alt="{{product_detail[0].title}}" class="img-list">
+			{% endif %}
+			<div class="card-body">
+				<h4 class="card-title">{{product_detail[0].title}}</h4>
+				<div class="card-text mt-2">{{product_detail[0].description|raw}}</div>
+				{# {% if product_detail[0].addCart %}
+					<a href="{{path("panier_add", {id: product_detail[0].id})}}" class="btn btn-dark w-100 mb-2">Ajouter au panier</a>
+				{% else %}
+					<a href="#" class="btn btn-dark w-100 invisible">Ajouter au panier</a>
+				{% endif %} #}
+				<a href="{{app.request.headers.get('referer')}}" class="btn btn-secondary w-100 mt-2">Retour au menu</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

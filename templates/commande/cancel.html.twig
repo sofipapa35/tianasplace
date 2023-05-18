@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annulation de paiement
+{% endblock %}
+
+{% block body %}
+	<div class="h-block-common my-3 p-3">
+		<h1>Annulation de paiement</h1>
+	</div>
+
+	<div class="h-block-common p-4 my-3">
+		<p>Bonjour
+			<span class="text-green">
+				{{commande.user.firstname}}
+				{{commande.user.name}}</span>,
+			<br>
+			Il semblerait que votre paiement est échoué pour votre commande n°
+			<span class="text-green">{{commande.id}}</span>.
+			<br>
+			Une confirmation d'erreur vient de vous être envoiyée par email à l'adresse
+			<span class="text-green">{{commande.user.email}}</span>.
+			<br>
+			<hr>
+			<a href="{{path('commande_detail')}}">Réessayer le paiement</a>
+
+		</p>
+	</div>
+{% endblock %}

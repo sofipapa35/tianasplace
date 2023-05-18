@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue
+	{{user.firstname}}
+	{{user.name}}
+{% endblock %}
+
+{% block body %}
+
+{# -------------------- Création des tabs ---------------------- #}
+<ul class="nav nav-tabs pt-2" id="myTab" role="tablist">
+	<li class="nav-item navItemCard" role="presentation">
+		<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Profil</button>
+	</li>
+	<li class="nav-item navItemCard" role="presentation">
+		<button class="nav-link" id="commandes-tab" data-bs-toggle="tab" data-bs-target="#commandes" type="button" role="tab" aria-controls="commandes" aria-selected="false">Mes commandes</button>
+	</li>
+	<li class="nav-item navItemCard" role="presentation">
+		<button class="nav-link" id="reservations-tab" data-bs-toggle="tab" data-bs-target="#reservations" type="button" role="tab" aria-controls="reservations" aria-selected="false">Mes réservations</button>
+	</li>
+</ul>
+
+<div
+	class="tab-content" id="myTabContent">
+	{# -------------------- Bienvenu au User ! ---------------------- #}
+	<div class="h-block-common p-3 my-2">
+		<h2>Bienvenue
+			{{user.firstname}}
+			{{user.name}}
+			!</h2>
+	</div>
+
+	{# -------------------- Tab informations ---------------------- #}
+	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		<div class="h-block-common p-3 my-2">
+			<h3 class="text-start">E-mail</h3>
+			<p class="lead">{{user.email}}</p>
+
+			<h3 class="text-start mt-5 mb-2">Adresse</h3>
+				<p class="lead">
+			{{ user.address ? user.address}}<br>
+			{{ user.zip ? user.zip }}
+			{{ user.ville ? user.ville }}</p>
+			{% if not user.address and not user.zip and not user.ville %}
+				<small class="lead">Vous n'avez pas indiqué d'adresse</small>
+			{% endif %}
+			<h3 class="text-start mt-5 mb-2">Numero Telephone</h3>
+			{% if user.telephone %}
+				<p class="lead">
+					{{user.telephone}}</p>
+			{% else %}
+				<small class="lead">Vous n'avez pas indiqué le telephone</small>
+			{% endif %}
+
+			<button class="btn btn-dark m-2" id="buttonUser">Modifier vos données personnelles</button>
+			<button class="btn btn-dark m-2" id="buttonPass">Modifier mot de passe</button>
+		</div>
+
+{# -------------------- Tab formulaire Pofil ---------------------- #}
+		<div class="h-block-common my-3 p-3" id="blockUser">
+			{{ form_start(profile_form) }}
+			{{ form_row(profile_form.email) }}
+			{{ form_row(profile_form.telephone) }}
+			<div class="row">
+				<div class="col-12">{{ form_row(profile_form.address) }}</div>
+				<div class="col-12 col-md-6">{{ form_row(profile_form.zip) }}</div>
+				<div class="col-12 col-md-6">{{ form_row(profile_form.ville) }}</div>
+			</div>
+			<button type="submit" class="btn btn-dark">Modifier</button>
+			{{ form_end(profile_form) }}
+		</div>
+
+{# -------------------- Tab formulaire Mot de passe ---------------------- #}
+
+		<div class="h-block-common my-3 p-3" id="blockPass">
+			{{ form_start(pass_form) }}
+			{{ form_row(pass_form.plainPassword) }}
+			<button type="submit" class="btn btn-dark">Modifier</button>
+			{{ form_end(pass_form) }}
+		</div>
+	</div>
+
+{# -------------------- Tab Commandes ---------------------- #}
+	<div class="tab-pane fade" id="commandes" role="tabpanel" aria-labelledby="commandes-tab">
+		<div class="h-block-common p-3 my-2">
+
+			{% if user.commandes is not null and user.commandes|length > 0 %}
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" class="text-green">N° commande</th>
+							<th scope="col" class="text-center text-green">Total prix</th>
+							<th scope="col" class="text-center text-green">Date de commande</th>
+							<th scope="col" class="text-center text-green">Status</th>
+							<th scope="col" class="text-end text-green"></th>
+							</tr>
+					</thead>
+					<tbody>
+						{% for commande in user.commandes %}
+							<tr>
+								<td>{{commande.id}}</td>
+								<td class="text-center">{{commande.total|number_format(2)}} €</td>
+								<td class="text-center"><i class="fa-solid fa-calendar-days"></i> {{commande.createdAt|date('d-m-Y')}}</td>
+								<td class="text-center text-green">
+									{% if commande.isPaid %}
+										<i class="fa-solid fa-circle-check" title="Completed"></i>
+									{% else %}
+										<i class="fa-solid fa-x" title="Annulée"></i>
+									{% endif %}
+								</td>
+								<td class="text-end"><a href="{{path('myCommande_detail', {'id':commande.id})}}">Voir les details</a></td>
+							</tr>
+						{% endfor %}
+	
+					</tbody>
+				</table>
+			{% else %}			
+				<h3>Il n'y a pas des commandes</h3>
+			{% endif %}
+		</div>
+	</div>
+
+{# -------------------- Tab Réservations ---------------------- #}
+	<div class="tab-pane fade" id="reservations" role="tabpanel" aria-labelledby="reservations-tab">
+		<div class="h-block-common p-3 my-2">
+		{% if user.reservation is not null and user.reservation|length > 0 %}
+			<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" class="text-green">N° réservation</th>
+							<th scope="col" class="text-center text-green">Jour</th>
+							<th scope="col" class="text-center text-green">Heure</th>
+							<th scope="col" class="text-center text-green">Nombre de personnes</th>
+							<th scope="col"></th>
+							</tr>
+					</thead>
+					<tbody>
+						{% for resa in user.reservation %}
+							<tr>
+								<td>{{resa.id}}</td>
+								<td class="text-center"><i class="fa-solid fa-calendar-days"></i> {{resa.jour|date('d-m-Y')}}</td>
+								<td class="text-center"><i class="fa-solid fa-clock"></i> {{resa.heure}}</td>
+								<td class="text-center"><i class="fa-solid fa-people-group"></i> {{resa.personnes}}</td>
+								<td class="text-green text-end">
+									{% if 'now'|date('U') > resa.jour|date('U') %}
+										<i class="fa-solid fa-calendar-check" title="Completed"></i>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		{% else %}
+			<h3>Il n'y a pas des réservations</h3>
+		{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+
+					$(document).ready(function () { // Selection du boutton 'button' + evenemrnt 'click'
+$('#buttonUser').click(function () { // On execute la methode slideToggle() de jQuery qui permet de faire apparaitreet disparaitre les elements selectionnées
+$('#blockUser').slideToggle('fast')
+// Paramètres slideToggle(); 'slow' , 'fast' : durée en millisecondes
+})
+
+$('#buttonPass').click(function () { // On execute la methode slideToggle() de jQuery qui permet de faire apparaitre et disparaitre les elements selectionnées
+$('#blockPass').slideToggle('fast')
+// Paramètres slideToggle(); 'slow' , 'fast' : durée en millisecondes
+})
+})
+	</script>
+{% endblock %}

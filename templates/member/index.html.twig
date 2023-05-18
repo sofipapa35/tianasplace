@@ -1,0 +1,15 @@
+{{ form_start(form_member, {'action': path('member')}) }}
+	<div class="d-md-flex justify-content-md-center align-items-md-end mb-2">
+		<div class="col-md-9 me-md-2">
+			{{form_label(form_member.email)}}
+			{{form_errors(form_member.email)}}
+			{{ form_widget(form_member.email) }}
+		</div>
+		<div
+			class="d-flex justify-content-center h-100">
+			
+			{{ form_widget(form_member.submit) }}
+		</div>
+	</div>
+	{{ form_end(form_member) }}
+

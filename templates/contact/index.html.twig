@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire de contact
+{% endblock %}
+{% block body %}
+
+	<div class="h-block-common my-3 p-3">
+		<h1>Formulaire de contact</h1>
+	</div>
+
+	<div class="d-flex flex-column justify-content-center align-items-center">
+		<div class="my-3 p-3 col-12 col-md-8">
+			<p class="text-end">* champs obligatoires</p>
+			{{ form_start(form) }}
+
+			<div class="d-flex">
+				<i class="fa-solid fa-user me-2"></i>
+				<div class="w-100">{{ form_row(form.fullName) }}</div>
+			</div>
+
+			<div class="d-flex">
+			<i class="fa-solid fa-at me-2"></i>
+				<div class="w-100">{{ form_row(form.email) }}</div>
+			</div>
+
+			<div class="ms-4">
+				{{ form_row(form.subject) }}
+			</div>
+
+			<div class="ms-4">
+				{{ form_row(form.message) }}
+			</div>
+			
+			<div>
+				<input type="submit" value="Envoyer" class="btn btn-dark p-md-3">
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{% endblock %}

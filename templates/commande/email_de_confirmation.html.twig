@@ -1,0 +1,18 @@
+<h1>N° commande
+	{{commande.id}}</h1>
+
+<p>Bonjour
+	<span class="text-green">
+		{{commande.user.firstname}}
+		{{commande.user.name}}</span>,
+	<br>
+	Nous vous remercions pour votre commande n°
+	<span class="text-green">{{commande.id}}</span>.
+	<br>
+	Votre commande sera bientôt livrée à l'adresse
+	{% set adresse = commande.delivery|split('<br>') %}
+	<span class="text-green">{{adresse[1]}}</span>
+</p>
+<hr>
+Pour suivre votre commande, rendez-vous dans le rubrique commande de votre
+<a href="{{absolute_url(path('profile'))}}">espace personnel</a>.

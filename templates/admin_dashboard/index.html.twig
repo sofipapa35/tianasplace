@@ -1,0 +1,26 @@
+{% extends 'base-admin.html.twig' %}
+
+{% block title %}Admin Dashboard
+{% endblock %}
+
+{% block body %}
+	<h2 class="my-3">Top vente</h2>
+
+	<div class="d-flex justify-content-evenly flex-wrap mt-4 pt-4">
+		{% for produit in topVente %}
+			<div class="d-flex flex-column">
+				<h2 class="text-center">{{ loop.index0 + 1 }}</h2>
+				<div class="card d-flex align-items-center m-1 h-100" style="width: 150px;">
+					{% if produit.imageName %}
+						<img src="{{ asset('images/menu/' ~ produit.imageName) }}" alt="{{produit.title}}" class="img-list" style="width: 120px;">
+					{% else %}
+						<img src="{{ asset('images/default/laCarte-fork-knif.jpg') }}" alt="{{produit.title}}" class="img-list">
+					{% endif %}
+					<div class="card-body">
+						<h4 class="card-title">{{produit.title}}</h4>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
